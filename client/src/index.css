@@ -1,0 +1,39 @@
+main {
+    min-height: 80vh;
+}
+
+.rating span {
+    margin: 0.1rem
+}
+
+h3 {
+    padding: 1rem 0;
+}
+
+.card {
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card a {
+    text-decoration: none;
+    color: rgb(0, 129, 43)
+}
+
+.card a:hover {
+    text-decoration: none;
+    color: rgb(0, 214, 71);
+    font-weight: bold;
+}
+
+.card img {
+    max-height: 22vh;
+    width: auto;
+}
+
+.card img:hover {
+    filter: saturate(1.5);
+    transform: scale(1.1);
+}
