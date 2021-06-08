@@ -1,0 +1,5 @@
+instalar ts:
+    npm install typescript ts-node @types/node @types/express --save-dev
+
+comando para crear el archivo config:
+    npx tsc --init
