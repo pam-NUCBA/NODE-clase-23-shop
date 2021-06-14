@@ -1,0 +1,22 @@
+[{
+        "name": "Juan Gomez",
+        "email": "jugo@mail.com",
+        "password": "123456",
+        "isAdmin": true
+    },
+    {
+        "name": "Pepito Perez",
+        "email": "pepe@mail.com",
+        "password": "123456"
+    },
+    {
+        "name": "Paula Valija",
+        "email": "pava@mail.com",
+        "password": "123456"
+    },
+    {
+        "name": "Carina Jastre",
+        "email": "caja@mail.com",
+        "password": "123456"
+    }
+]

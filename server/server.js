@@ -1,26 +1,34 @@
-import express from 'express';
-import dotenv from 'dotenv'
-import products from './data/products.js'
+import express from "express";
+import dotenv from "dotenv";
 import dbConnection from "./config/db.js";
-import colors from 'colors'
-https://www.npmjs.com/package/colors
+import colors from "colors";
+import morgan from "morgan";
+import productsRouter from "./routes/productsRoutes.js";
+import usersRouter from "./routes/usersRoutes.js";
+import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 
-dotenv.config()
+//configs
+dotenv.config();
 const app = express();
-const PORT= process.env.PORT || 8000
-dbConnection()
+const PORT = process.env.PORT || 8000;
+dbConnection();
 
-app.get('/api/products', (req, res) => {
-    //*recordemos que podemos ver los datos:
-    res.json(products);
-})
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
-app.get('/api/products/:id', (req, res) => {
-    //*recordemos que podemos ver los datos:
-    const product = products.find(p => p._id === req.params.id)
-    res.json(product)
-})
+//routes:
+app.use("/api/products", productsRouter);
+app.use("/api/users", usersRouter);
 
+//middlewares:
+app.use(notFound);
+app.use(errorHandler);
+
+//start:
 app.listen(PORT, () => {
-    console.log(`App running on http://localhost:${PORT}`.yellow);
-})
+  console.log(
+    `App running on ${process.env.NODE_ENV} mode at http://localhost:${PORT}`
+      .yellow
+  );
+});

@@ -8,9 +8,7 @@
         "start": "node server.js",
         "dev": "nodemon server.js",
         "client": "cd .. && cd client && npm start",
-        "app": "concurrently \"npm run dev\" \"npm run client\"",
-        "data:import": "node seeder",
-        "data:destroy": "node seeder -d"
+        "app": "concurrently \"npm run dev\" \"npm run client\""
     },
     "keywords": [],
     "author": "",
