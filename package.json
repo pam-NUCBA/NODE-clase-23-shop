@@ -2,9 +2,12 @@
     "name": "shop",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node server/server.js",
+        "dev": "nodemon server/server.js",
+        "client": "cd client && npm start",
+        "app": "concurrently \"npm run dev\" \"npm run client\""
     },
     "author": "",
     "license": "ISC"

@@ -5,19 +5,22 @@ import Header from "./components/shr/Header";
 import Home from "./components/pages/Home";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Product from "./components/pages/Product";
+import ProductsState from "./context/productsContext/productsState";
 
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <main className="py-3">
-        <Container>
-          <Route path="/" exact component={Home} />
-          <Route path="/product/:id" exact component={Product} />
-        </Container>
-      </main>
-      <Footer />
-    </Router>
+    <ProductsState>
+      <Router>
+        <Header />
+        <main className="py-3">
+          <Container>
+            <Route path="/" exact component={Home} />
+            <Route path="/product/:id" exact component={Product} />
+          </Container>
+        </main>
+        <Footer />
+      </Router>
+    </ProductsState>
   );
 };
 

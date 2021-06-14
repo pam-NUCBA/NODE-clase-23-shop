@@ -1,0 +1,4 @@
+para convertir a un json:
+https://www.convertsimple.com/convert-javascript-to-json/
+
+luego lo podemos subir al mongo compass. Chequeamos en mongo atlas que se vean, y en el archivo de config deberíamos cambiar el myFirstDatabase por el nombre de la base de datos que creamos.

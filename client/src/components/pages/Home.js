@@ -1,21 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect, useContext } from "react";
 import { Col, Row } from "react-bootstrap";
-// import products from "../../products";
 import Product from "../shr/Product";
-import axios from 'axios'
+import ProductsContext from "../../context/productsContext/productsContext";
 
 const Home = () => {
-  const [products, setProducts] = useState([])
-
+  const { products, listProducts } = useContext(ProductsContext);
+  
   useEffect(() => {
-    const getProducts = async () => {
-      //este data lo destructuro de res.data:
-      const {data} = await axios.get('/api/products')
-      console.log(data);
-    setProducts(data)
-    }
-    getProducts()
-  }, [])
+    listProducts();
+  }, []);
 
   return (
     <>
