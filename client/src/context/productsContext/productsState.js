@@ -6,26 +6,29 @@ import {
   PRODUCT_LIST_REQ,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_FAIL,
+  PRODUCT_DETAIL_REQ,
+  PRODUCT_DETAIL_SUCCESS,
+  PRODUCT_DETAIL_FAIL,
 } from "../types";
 
 const ProductsState = (props) => {
   const initialState = {
     products: [],
-    // reviews: [],
-    // loading: false,
+    product: {},
+    reviews: [],
+    loading: false,
     // error: null,
     // success: null,
-    // product: {},
   };
   const [state, dispatch] = useReducer(productsReducer, initialState);
 
   //*podemos anidar los types!
+  //traer todos los productos
   const listProducts = async () => {
     try {
       dispatch({ type: PRODUCT_LIST_REQ });
 
       const { data } = await axios.get(`/api/products`);
-      console.log("success data: ", data);
       dispatch({
         type: PRODUCT_LIST_SUCCESS,
         payload: data,
@@ -43,6 +46,30 @@ const ProductsState = (props) => {
     }
   };
 
+//traer un producto
+const productDetail = async (id) => {
+  try {
+    dispatch({ type: PRODUCT_DETAIL_REQ });
+
+    const { data } = await axios.get(`/api/products/${id}`);
+    console.log("success data: ", data);
+    dispatch({
+      type: PRODUCT_DETAIL_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log("error data: ", error);
+    
+    dispatch({
+      type: PRODUCT_DETAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
   return (
     <ProductsContext.Provider
       value={{
@@ -53,6 +80,7 @@ const ProductsState = (props) => {
         success: state.success,
         product: state.product,
         listProducts,
+        productDetail
       }}
     >
       {props.children}

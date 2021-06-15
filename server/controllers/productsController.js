@@ -6,7 +6,7 @@ const getProducts = expressAsyncHandler(async (req, res) => {
   res.json(products);
   //*probar errores en el front:
   // res.status(403);
-  // throw new Error("Siths are messing with our page");
+  // throw new Error('Siths are messing with our page!');
 });
 
 const getOneProduct = expressAsyncHandler(async (req, res) => {
