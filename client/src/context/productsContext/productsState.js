@@ -16,9 +16,7 @@ const ProductsState = (props) => {
     products: [],
     product: {},
     reviews: [],
-    loading: false,
-    // error: null,
-    // success: null,
+    loading: false
   };
   const [state, dispatch] = useReducer(productsReducer, initialState);
 
@@ -52,7 +50,7 @@ const productDetail = async (id) => {
     dispatch({ type: PRODUCT_DETAIL_REQ });
 
     const { data } = await axios.get(`/api/products/${id}`);
-    console.log("success data: ", data);
+    // console.log("success data: ", data);
     dispatch({
       type: PRODUCT_DETAIL_SUCCESS,
       payload: data,
@@ -76,8 +74,6 @@ const productDetail = async (id) => {
         products: state.products,
         reviews: state.reviews,
         loading: state.loading,
-        error: state.error,
-        success: state.success,
         product: state.product,
         listProducts,
         productDetail

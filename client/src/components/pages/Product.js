@@ -1,5 +1,5 @@
-import React, { useEffect, useContext } from "react";
-import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import React, { useEffect, useContext, useState } from "react";
+import { Button, Card, Col, Image, ListGroup, Row, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Ratings from "../shr/Ratings";
 import NumberFormat from "react-number-format";
@@ -7,19 +7,26 @@ import ProductsContext from "../../context/productsContext/productsContext";
 import Loading from "../shr/Loading";
 import Message from "../shr/Message";
 
-const Product = ({match}) => {
+const Product = ({match, history}) => {
+  //*en principio paso 1 como cantidad, luego se va a reemplazar
+  const [quantity, setQuantity] = useState(1)
   const { product, loading, error, productDetail } =
     useContext(ProductsContext);
 
-    console.log(product);
+    // console.log(product);
 
     const { image, name, rating, numReviews, price, description, countInStock } =
       product;
 
     useEffect(() => {
     productDetail(match.params.id);
-    console.log(match.params.id);
+    // console.log(match.params.id);
   }, []);
+
+  const handleAddToCart = () => {
+    //*match ya lo traemos desde las props, agregamos history a ellas
+    history.push(`/cart/${match.params.id}?quantity=${quantity}`)
+  }
 
   return (
     <>
@@ -88,11 +95,30 @@ const Product = ({match}) => {
                       </Col>
                     </Row>
                   </ListGroup.Item>
+                  {/* el boton de cantidad a comprar solo debería verse si hay cantidad */}
+                  {product.countInStock > 0 &&
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Quantity</Col>
+                        <Col>
+                        <Form.Control as="select" value={quantity} onChange={e => setQuantity(e.target.value)}>
+                      {  [...Array(product.countInStock).keys()].map(q => (
+                          <option key={q + 1} value={q + 1}>
+                            {q + 1}
+                          </option>
+                        ))}
+
+                        </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  }
                   <ListGroup.Item>
                     <Button
                       className="btn-block btn-dark"
                       type="button"
                       disabled={countInStock === 0}
+                      onClick={handleAddToCart}
                     >
                       Add to cart
                     </Button>
