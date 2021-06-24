@@ -37,3 +37,7 @@ h3 {
     filter: saturate(1.5);
     transform: scale(1.1);
 }
+
+.cart-image {
+    max-height: 22vh;
+}

@@ -14,7 +14,7 @@ const CartState = (props) => {
     const { data } = await axios.get(`/api/products/${id}`);
 
     const { _id, name, image, price, countInStock } = data;
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: CART_ADD_ITEM,
       payload: {
