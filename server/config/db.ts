@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 //db connection
 const dbConnection = async () => {
   try {
@@ -11,7 +10,7 @@ const dbConnection = async () => {
         useUnifiedTopology: true,
         useCreateIndex: true
       },
-      () => console.log("connected to atlas".rainbow.bold)
+      () => console.log("connected to atlas")
     );
   } catch (error) {
     console.log(error.red.bold);

@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import dbConnection from "./config/db.js";
-import colors from "colors";
 import morgan from "morgan";
 import productsRouter from "./routes/productsRoutes.js";
 import usersRouter from "./routes/usersRoutes.js";
@@ -12,6 +11,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 dbConnection();
+
+app.use(express.json())
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -29,6 +30,5 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(
     `App running on ${process.env.NODE_ENV} mode at http://localhost:${PORT}`
-      .yellow
   );
 });

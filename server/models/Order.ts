@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const orderSchema = mongoose.Schema(
+//*acá ya van a ver que ts empieza a romper!
+const orderSchema = new mongoose.Schema(
   {
     //*es un user comun, no un admin, pero esa categoria la va a sacar de sus caracteristicas!
     user: {
@@ -93,6 +94,4 @@ const orderSchema = mongoose.Schema(
   }
 );
 
-const Order = mongoose.model("Order", orderSchema);
-
-export default Order;
+export default  mongoose.model("Order", orderSchema);

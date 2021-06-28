@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 //*para cuando le dejan mensajes de review:
-const reviewSchema = mongoose.Schema(
+const reviewSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -26,7 +26,7 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
-const productSchema = mongoose.Schema(
+const productSchema = new mongoose.Schema(
   {
     //*para saber qué admin es el que lo creo:
     user: {
@@ -82,6 +82,4 @@ const productSchema = mongoose.Schema(
   }
 );
 
-const Product = mongoose.model("Product", productSchema);
-
-export default Product;
+export default mongoose.model("Product", productSchema);

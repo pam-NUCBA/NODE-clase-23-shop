@@ -3,3 +3,15 @@ instalar ts:
 
 comando para crear el archivo config:
     npx tsc --init
+
+instrucciones y mas detalles:
+https://khalilstemmler.com/blogs/typescript/node-starter-project/
+https://github.com/stemmlerjs/simple-typescript-starter/blob/master/tsconfig.json
+
+instalar:
+npm install -g ts-node
+
+para hacerlo correr:
+node --loader ts-node/esm ./server.ts
+
+no va a correr hasta que arreglemos todos los problemas ;)
