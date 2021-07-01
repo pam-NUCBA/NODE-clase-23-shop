@@ -1,15 +1,15 @@
-import mongoose, { Schema, Document } from "mongoose";
-import bcrypt from 'bcryptjs'
+import mongoose, { Document } from "mongoose";
+import bcrypt from "bcryptjs";
 
 export interface IUser extends Document {
-  name: string,
-  email: string,
-  password: string,
-  isAdmin: boolean,
-  matchPassword: (enteredPassword: string) => Promise<boolean>
+  name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+  matchPassword: (enteredPassword: string) => Promise<boolean>;
 }
 
-const userSchema = new Schema<IUser>(
+const userSchema = new mongoose.Schema<IUser>(
   {
     name: {
       type: String,
@@ -35,20 +35,19 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-
+//*queremos comparar el pass que se ingrese con el que esté registrado
 userSchema.methods.matchPassword = async function (enteredPassword: string) {
-  let isValid = await bcrypt.compare(enteredPassword, this.password)
+  let isValid = await bcrypt.compare(enteredPassword, this.password);
   return isValid;
-}
+};
 
-userSchema.pre<IUser>('save', async function (next) {
-  if (!this.isModified('password')) {
-    next()
+userSchema.pre<IUser>("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
   }
 
-  const salt = await bcrypt.genSalt(10)
-  this.password = await bcrypt.hash(this.password, salt)
-})
-
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 export default mongoose.model<IUser>("User", userSchema);
