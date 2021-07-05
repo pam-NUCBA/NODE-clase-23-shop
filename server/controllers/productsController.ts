@@ -2,7 +2,7 @@ import Product from "../models/Product.js";
 import expressAsyncHandler from "express-async-handler";
 import { Request, Response } from "express";
 
-const getProducts = expressAsyncHandler(async (req: Request, res: Response) => {
+const getProducts = expressAsyncHandler(async (req: Request, res: Response): Promise<void> => {
   const products = await Product.find({});
   res.json(products);
   //*probar errores en el front:
@@ -10,7 +10,7 @@ const getProducts = expressAsyncHandler(async (req: Request, res: Response) => {
   // throw new Error('Siths are messing with our page!');
 });
 
-const getOneProduct = expressAsyncHandler(async (req: Request, res: Response) => {
+const getOneProduct = expressAsyncHandler(async (req: Request, res: Response): Promise<void> => {
   const product = await Product.findById(req.params.id);
   if (product) {
     res.json(product);

@@ -4,7 +4,6 @@
     "main": "server.js",
     "type": "module",
     "scripts": {
-        "start": "node server.ts",
         "start:dev": "nodemon",
         "client": "cd .. && cd client && npm start",
         "app": "concurrently \"npm run start:dev\" \"npm run client\""
@@ -24,8 +23,7 @@
         "express-async-handler": "^1.1.4",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.12.13",
-        "morgan": "^1.10.0",
-        "multer": "^1.4.2"
+        "morgan": "^1.10.0"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",

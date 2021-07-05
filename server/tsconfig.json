@@ -1,29 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es5",                          
-    "module": "es2020",                    
-    "lib": ["es6"],                     
+    "target": "es5",
+    "module": "es2020",
+    "lib": ["es6"],
     "allowJs": true,
-    "outDir": "build",                          
+    "outDir": "build",
     "rootDir": ".",
-    "strict": false,         
+    "strict": false,
     "noImplicitAny": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "types": ["node"],
-    "typeRoots" : ["./node_modules/@types"],
+    "typeRoots": ["./typings", "./node_modules/@types"],
     "baseUrl": ".",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
   "typeAcquisition": {
     "enable": false
   },
-  "include": [
-    "./**/*"
-  ],
-  "exclude" : [
-    "./**/*.spec.ts",
-    "./data/*",
-    "node_modules"
-  ]
+  "include": ["./**/*"],
+  "exclude": ["./**/*.spec.ts", "./data/*", "node_modules"]
 }
