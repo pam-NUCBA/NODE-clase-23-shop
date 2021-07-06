@@ -1,10 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
-import dbConnection from "./config/db.js";
+import dbConnection from "./config/db";
 import morgan from "morgan";
-import productsRouter from "./routes/productsRoutes.js";
-import usersRouter from "./routes/usersRoutes.js";
-import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
+import productsRouter from "./routes/productsRoutes";
+import usersRouter from "./routes/usersRoutes";
+import { notFound, errorHandler } from "./middlewares/errorMiddleware";
 
 //extending request:
 declare global {

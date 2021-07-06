@@ -1,7 +1,7 @@
-import User from "../models/User.js";
+import User from "../models/User";
 import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
-import generateToken from "../utils/generateToken.js";
+import generateToken from "../utils/generateToken";
 
 //*vamos a tener que hacer auth de user y password para enviar un token que se va a guardar en el client
 

@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2020",
-    "lib": ["es6"],
+    "target": "es6",
+    "module": "commonJS",
     "allowJs": true,
     "outDir": "build",
     "rootDir": ".",
@@ -13,11 +12,13 @@
     "types": ["node"],
     "typeRoots": ["./node_modules/@types"],
     "baseUrl": ".",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true
   },
   "typeAcquisition": {
     "enable": false
   },
   "include": ["./**/*"],
-  "exclude": ["./**/*.spec.ts", "./data/*", "node_modules"]
+  "exclude": ["./data/*", "node_modules"]
 }
