@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "types": ["node"],
-    "typeRoots": ["./typings", "./node_modules/@types"],
+    "typeRoots": ["./node_modules/@types"],
     "baseUrl": ".",
     "resolveJsonModule": true
   },

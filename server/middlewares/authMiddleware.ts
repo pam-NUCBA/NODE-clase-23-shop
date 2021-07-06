@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import { Request, Response, NextFunction } from "express";
 
 const protectRoutes = asyncHandler(
-  async (req: Request | any, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     //*el token va a llegar desde los headers como un bearer token
     let token;
     //*podemos consolear y vmaos a ver que nos trae el token:
@@ -37,8 +37,7 @@ const protectRoutes = asyncHandler(
   }
 );
 
-const adminRoutes = (req: Request | any, res: Response, next: NextFunction): void => {
-  //*supuestamente la carpeta types debería funcionar pero no lo está haciendo, por ahora cambio el req a any
+const adminRoutes = (req: Request, res: Response, next: NextFunction): void => {
   if (req.user && req.user.isAdmin) {
     next();
   } else {

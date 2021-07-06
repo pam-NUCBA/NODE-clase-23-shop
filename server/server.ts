@@ -6,13 +6,22 @@ import productsRouter from "./routes/productsRoutes.js";
 import usersRouter from "./routes/usersRoutes.js";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 
+//extending request:
+declare global {
+  namespace Express {
+    export interface Request {
+      user?: any;
+    }
+  }
+}
+
 //configs
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 dbConnection();
 
-app.use(express.json())
+app.use(express.json());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

@@ -66,7 +66,7 @@ const authUser = expressAsyncHandler(
 //? GET user profile: esta va a ser una ruta protegida, y solo se va a poder entrar estando logueado
 //? api/users/profile
 const getUserProfile = expressAsyncHandler(
-  async (req: any, res: Response): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const user = await User.findById(req.user._id);
     const { _id, name, email, isAdmin } = req.user;
     //*los extraigo porque si paso el ...req.user va a traer mucha info que no necesito
