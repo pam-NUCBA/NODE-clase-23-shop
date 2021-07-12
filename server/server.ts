@@ -5,6 +5,7 @@ import morgan from "morgan";
 import productsRouter from "./routes/productsRoutes";
 import usersRouter from "./routes/usersRoutes";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware";
+import mercadopago from 'mercadopago'
 
 //extending request:
 declare global {
@@ -20,12 +21,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 dbConnection();
-
 app.use(express.json());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+mercadopago.configurations.setAccessToken(process.env.MERCADO_TOKEN)
 
 //routes:
 app.use("/api/products", productsRouter);

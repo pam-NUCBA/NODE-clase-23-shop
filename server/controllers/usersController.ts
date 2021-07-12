@@ -25,8 +25,6 @@ const registerUser = expressAsyncHandler(
       password,
     });
 
-    // console.log(user);
-
     if (user) {
       //*para hacer el sign del token lo vamos a hacer en el util. Si probamos en https://jwt.io/ vamos a ver que los datos que devuelve el payload son el id, the issuedAtDate y la expiration date
       res.status(201).json({

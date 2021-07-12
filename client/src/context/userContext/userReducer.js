@@ -4,32 +4,38 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,
 } from "../types";
-//*continuar
+
 export default (state, { type, payload }) => {
   switch (type) {
     case USER_LOGIN_REQ:
       return {
         ...state,
-        user: {},
+        userInfo: {},
         loading: true,
       };
     case USER_LOGIN_SUCCESS:
+      localStorage.setItem("userInfo", JSON.stringify(payload));
+      console.log(state.userInfo);
       return {
         ...state,
-        user: payload,
+        userInfo: payload,
         loading: false,
       };
     case USER_LOGIN_FAIL:
       return {
         ...state,
-        user: {},
+        userInfo: {},
         error: payload,
         loading: false,
       };
     case USER_LOGOUT:
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("cartItems");
+      // localStorage.removeItem('shippingAddress')
+      // localStorage.removeItem('paymentMethod')
       return {
         ...state,
-        user: {},
+        userInfo: {},
         loading: false,
       };
     default:

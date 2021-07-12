@@ -2,11 +2,9 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../types";
 
 export default (state, { type, payload }) => {
   switch (type) {
-
     case CART_ADD_ITEM:
       const item = payload;
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-    // console.log(state.cartItems);
       const existItem = state.cartItems.find((x) => x._id === item._id);
 
       //*si existe lo chequeamos, y si no existe, solo ahí se agrega

@@ -8,24 +8,39 @@ import Product from "./components/pages/Product";
 import ProductsState from "./context/productsContext/productsState";
 import CartState from "./context/cartContext/cartState";
 import Cart from "./components/pages/Cart";
+import Login from "./components/pages/Login";
+import UserState from "./context/userContext/userState";
+import Register from "./components/pages/Register";
+import Checkout from "./components/pages/Checkout";
+import Payment from "./components/pages/Payment";
 
 const App = () => {
+
+console.log(process.env.REACT_APP_MP_ACCESS_TOKEN);
+// const MP = new MercadoPago(process.env.REACT_APP_MP_ACCESS_TOKEN)
+  // console.log(MP);
+  
   return (
     <CartState>
-      <ProductsState>
-        <Router>
-          <Header />
-          <main className="py-3">
-            <Container>
-              <Route path="/" exact component={Home} />
-              <Route path="/product/:id" exact component={Product} />
-              {/* pongo los param opcionales, porque si apretara cart directamente, no habría cantidad que mostrar! */}
-              <Route path="/cart/:id?" component={Cart} />
-            </Container>
-          </main>
-          <Footer />
-        </Router>
-      </ProductsState>
+      <UserState>
+        <ProductsState>
+          <Router>
+            <Header />
+            <main className="py-3">
+              <Container>
+              {/* <Route path="/" exact component={Payment} /> */}
+                <Route path="/" exact component={Home} />
+                <Route path="/product/:id" exact component={Product} />
+                {/* pongo los param opcionales, porque si apretara cart directamente, no habría cantidad que mostrar! */}
+                <Route path="/cart/:id?" component={Cart} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+              </Container>
+            </main>
+            <Footer />
+          </Router>
+        </ProductsState>
+      </UserState>
     </CartState>
   );
 };

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 //*acá ya van a ver que ts empieza a romper!
-const orderSchema = new mongoose.Schema(
+const checkoutSchema = new mongoose.Schema(
   {
     //*es un user comun, no un admin, pero esa categoria la va a sacar de sus caracteristicas!
     user: {
@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
     },
     //*es un array porque son las caracteristicas del producto que tiene en su cart
-    orderItems: [
+    checkoutItems: [
       {
         name: {
           type: String,
@@ -59,39 +59,10 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    //*esto va a venir de paypal
-    paymentResult: {
-      id: String,
-      status: String,
-      update_time: String,
-      email_address: String,
-    },
-    shippingPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
-    totalPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
-    isPaid: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    paidAt: Date,
-    isDelivered: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    deliveredAt: Date,
   },
   {
     timestamps: true,
   }
 );
 
-export default  mongoose.model("Order", orderSchema);
+export default  mongoose.model("Checkout", checkoutSchema);

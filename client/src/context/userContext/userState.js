@@ -8,21 +8,26 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,
 } from "../types";
-//*continuar
 
 const UserState = (props) => {
   const initialState = {
-    user: {},
+    userInfo: {},
     loading: false,
+    error: false
   };
 
   const [state, dispatch] = useReducer(userReducer, initialState);
 
-  const userLogin = async () => {
+  const userLogin = async (email, password) => {
     try {
       dispatch({ type: USER_LOGIN_REQ });
-
-      const { data } = await axios.get(`/api/login`);
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const { data } = await axios.post('/api/users/login', {email, password}, config);
+      console.log(data);
       dispatch({
         type: USER_LOGIN_SUCCESS,
         payload: data,
@@ -39,16 +44,18 @@ const UserState = (props) => {
     }
   };
 
-  const userLogout = (async = () => {
+  const userLogout = async () => {
     dispatch({
       type: USER_LOGOUT,
     });
-  });
+  };
 
   return (
     <UserContext.Provider
       value={{
-        user: state.user,
+        userInfo: state.userInfo,
+        loading: state.loading,
+        error: state.error,
         userLogin,
         userLogout,
       }}
