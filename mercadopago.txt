@@ -21,4 +21,64 @@ TEST-6288344527382203-070802-b76e8207e8e16c6725f88f562aff1721-96084207
 La clave pública, o Public key, te sirve para acceder a los recursos que necesita tu frontend. Con ella vas a poder recolectar los datos de las tarjetas de crédito y convertirlos en un token representativo que puedes enviar de forma segura a tus servidores para crear un pago.
 
 La clave privada, o Access token, te va a permitir llamar al resto de las APIs desde tus servidores. Por ejemplo, para procesar un pago, realizar un reembolso o almacenar tarjetas.
+--------
+
+tenemos que crear dos usuarios, uno de vendedor y otro de comprador (sino nos va a decir que no nos podemos pagar a nosotros mismos)
+https://api.mercadopago.com/users/test_user
+
+header: application/json
+
+en el auth tiene que ir: Bearer token y pegamos el token que tenemos
+
+en el body: json raw:
+{
+    "site_id": "MLA"
+}
+
+creo al menos dos user:
+{
+    "id": 790298397,
+    "nickname": "TESTOEFLBI0U",
+    "password": "qatest3637",
+    "site_status": "active",
+    "email": "test_user_55199482@testuser.com"
+}
+
+su access token:
+TEST-8512716014810796-071302-773d9f37f3566852fa0dc8c2581a42df-790298397
+
+{
+    "id": 790302788,
+    "nickname": "TT082557",
+    "password": "qatest4244",
+    "site_status": "active",
+    "email": "test_user_29125515@testuser.com"
+}
+su access token:
+TEST-2767341793427998-071302-08b7792ae2b856bc8319d0e4419e4d96-790302788
+
+nos logueamos con ese usuario de prueba, no con el nuestro! tengo que loguear con uno pero usar el access token del otro.
+-------
+
+podemos hacer un post acá:
+https://api.mercadolibre.com/checkout/preferences?access_token=TEST-6288344527382203-070802-b76e8207e8e16c6725f88f562aff1721-96084207
+con un cuerpo similar a este:
+{
+    "external_reference": "ABC",
+    "notification_url": "www.blabla",
+    "items": [
+        {
+            "title": "cosa1",
+            "quantity": 3,
+            "unit_price": 400
+        }
+    ]
+}
+
+y en la respuesta tenemos un sandbox_init_point, en mi caso este:
+https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id=96084207-dbe09b7d-f5f8-45f5-8888-b26880b7fcd5
+es la url de redirección para generar el flujo de pago
+
+seguir acá:
+https://www.youtube.com/watch?v=x1DCjagVUKY
 

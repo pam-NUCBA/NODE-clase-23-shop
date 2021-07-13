@@ -1,4 +1,4 @@
-import Checkout from "../models/Checkout";
+// import Checkout from "../models/Checkout";
 import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import mercadopago from "mercadopago";
@@ -7,60 +7,76 @@ import mercadopago from "mercadopago";
 
 //? POST: process payment:
 //? api/payment/process_payment
-const postProcessPayment = expressAsyncHandler(
+// const postProcessPayment = expressAsyncHandler(
+//   async (req: Request, res: Response): Promise<void> => {
+//     let payment_data = {
+//         transaction_amount: Number(req.body.transactionAmount),
+//         token: req.body.token,
+//         description: req.body.description,
+//         installments: Number(req.body.installments),
+//         payment_method_id: req.body.paymentMethodId,
+//         issuer_id: req.body.issuerId,
+//         payer: {
+//           email: req.body.payer.email,
+//           identification: {
+//             type: req.body.payer.identification.docType,
+//             number: req.body.payer.identification.docNumber
+//           }
+//         }
+//       };
+    
+//       mercadopago.payment.save(payment_data)
+//         .then(function(response) {
+//           res.status(response.status).json({
+//             status: response.body.status,
+//             message: response.body.status_detail,
+//             id: response.body.id
+//           });
+//         })
+//         .catch(function(error) {
+//           res.status(error.status).send(error);
+//         });
+//   }
+// );
+
+const createPreference = expressAsyncHandler(
   async (req: Request, res: Response): Promise<void> => {
-    let payment_data = {
-      transaction_amount: Number(req.body.transactionAmount),
-      token: req.body.token,
-      description: req.body.description,
-      installments: Number(req.body.installments),
-      payment_method_id: req.body.paymentMethodId,
-      issuer_id: req.body.issuerId,
-      payer: {
-        email: req.body.payer.email,
-        identification: {
-          type: req.body.payer.identification.docType,
-          number: req.body.payer.identification.docNumber,
-        },
-      },
-    };
 
-    mercadopago.payment
-      .save(payment_data)
-      .then((response) => {
-        res.status(response.status).json({
-          status: response.body.status,
-          message: response.body.status_detail,
-          id: response.body.id,
-        });
-      })
-      .catch((error) => {
-        res.status(error.status).send(error);
-      });
-  }
-);
+	let preference: any;
+  
+  preference = {
+		items: [{
+			title: req.body.description,
+			unit_price: Number(req.body.price),
+			quantity: Number(req.body.quantity),
+		}],
+		back_urls: {
+			"success": "http://localhost:8080/feedback",
+			"failure": "http://localhost:8080/feedback",
+			"pending": "http://localhost:8080/feedback"
+		},
+		auto_return: 'approved',
+	};
 
-//? POST:
-//? api/payment/checkout
-const postCheckoutButton = expressAsyncHandler(
-  async (req: Request, res: Response): Promise<void> => {}
-);
+	mercadopago.preferences.create(preference)
+		.then(function (response) {
+			res.json({id :response.body.id})
+		}).catch(function (error) {
+			console.log(error);
+		});
+});
 
-//? POST:
-//? api/payment/pagar
-const postCreatePayment = expressAsyncHandler(
-  async (req: Request, res: Response): Promise<void> => {}
-);
-
-//? POST
-//? api/payment/wallet
-const postWalletButton = expressAsyncHandler(
-  async (req: Request, res: Response): Promise<void> => {}
-);
+const feedback = expressAsyncHandler(
+  async (req: Request, res: Response): Promise<void> => {
+	 res.json({
+		Payment: req.query.payment_id,
+		Status: req.query.status,
+		MerchantOrder: req.query.merchant_order_id
+	})
+});
 
 export {
-  postCheckoutButton,
-  postWalletButton,
-  postCreatePayment,
-  postProcessPayment,
+  // postProcessPayment,
+  createPreference,
+  feedback
 };

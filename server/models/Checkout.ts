@@ -1,6 +1,24 @@
 import mongoose from "mongoose";
 
-//*acá ya van a ver que ts empieza a romper!
+
+//*revisar
+export interface ICheckout extends Document {
+transaction_amount: number;
+    token: any;
+    description: string;
+    installments: number;
+    payment_method_id: any;
+    issuer_id: any;
+    payer: {
+        email: string;
+        identification: {
+            type: any;
+            number: any;
+        };
+    }
+}
+
+
 const checkoutSchema = new mongoose.Schema(
   {
     //*es un user comun, no un admin, pero esa categoria la va a sacar de sus caracteristicas!

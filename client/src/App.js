@@ -16,9 +16,7 @@ import Payment from "./components/pages/Payment";
 
 const App = () => {
 
-console.log(process.env.REACT_APP_MP_ACCESS_TOKEN);
-// const MP = new MercadoPago(process.env.REACT_APP_MP_ACCESS_TOKEN)
-  // console.log(MP);
+// console.log(process.env.REACT_APP_MP_ACCESS_TOKEN);
   
   return (
     <CartState>
@@ -28,8 +26,8 @@ console.log(process.env.REACT_APP_MP_ACCESS_TOKEN);
             <Header />
             <main className="py-3">
               <Container>
-              {/* <Route path="/" exact component={Payment} /> */}
-                <Route path="/" exact component={Home} />
+              <Route path="/" exact component={Checkout} />
+                {/* <Route path="/" exact component={Home} /> */}
                 <Route path="/product/:id" exact component={Product} />
                 {/* pongo los param opcionales, porque si apretara cart directamente, no habría cantidad que mostrar! */}
                 <Route path="/cart/:id?" component={Cart} />

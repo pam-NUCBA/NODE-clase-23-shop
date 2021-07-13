@@ -4,6 +4,7 @@ import dbConnection from "./config/db";
 import morgan from "morgan";
 import productsRouter from "./routes/productsRoutes";
 import usersRouter from "./routes/usersRoutes";
+import mercadoRouter from './routes/checkoutRoutes'
 import { notFound, errorHandler } from "./middlewares/errorMiddleware";
 import mercadopago from 'mercadopago'
 
@@ -28,10 +29,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 mercadopago.configurations.setAccessToken(process.env.MERCADO_TOKEN)
+// console.log(process.env.MERCADO_TOKEN)
 
 //routes:
 app.use("/api/products", productsRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/pay", mercadoRouter)
 
 //middlewares:
 app.use(notFound);
